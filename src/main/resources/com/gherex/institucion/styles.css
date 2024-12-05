@@ -1,0 +1,28 @@
+.vbox {
+    -fx-padding: 30; /* Todos los lados */
+    -fx-background-color: #d2d2d2;
+}
+
+.label {
+    -fx-font-size: 16px;
+}
+
+.text-field {
+    -fx-max-width: 300px;
+    -fx-font-size: 14px;
+}
+
+.text-field-buscar {
+    -fx-pref-width: 100px;
+}
+
+.label-accion {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-min-width: 100px;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
