@@ -21,6 +21,7 @@
             <Button onAction="#btnRegistrar" styleClass="button">Registrar</Button>
             <Button onAction="#btnModificar" styleClass="button">Modificar</Button>
             <Button onAction="#btnEliminar" styleClass="button">Eliminar</Button>
+            <Button onAction="#btnGenerarPDF" styleClass="button">Generar PDF</Button>
         </HBox>
     </VBox>
     <VBox spacing="10">

@@ -3,6 +3,7 @@ module com.gherex.institucion {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires itextpdf;
 
 
     opens com.gherex.institucion to javafx.fxml;

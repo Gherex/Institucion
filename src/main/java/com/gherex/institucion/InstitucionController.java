@@ -1,12 +1,15 @@
 package com.gherex.institucion;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
-
 import javax.swing.*;
+import java.io.FileOutputStream;
 import java.sql.*;
 
 public class InstitucionController {
@@ -128,5 +131,42 @@ public class InstitucionController {
         } catch (Exception e) {
             System.out.println("Error en btnBuscar: " + e);
         }
+    }
+
+    @FXML
+    protected void btnGenerarPDF() {
+        Document documento = new Document();
+        try {
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Escritorio/ReporteAlumnos.pdf"));
+            documento.open();
+            PdfPTable tabla = new PdfPTable(3);
+            tabla.addCell("Código");
+            tabla.addCell("Nombre del alumno");
+            tabla.addCell("Grupo");
+            try {
+                Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bd_institución","root","");
+                PreparedStatement pst = cn.prepareStatement("select * from alumnos");
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    do {
+                        tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
+                        tabla.addCell(rs.getString(3));
+                    } while (rs.next());
+                    documento.add(tabla);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            documento.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        estadoAccion.setStyle("-fx-text-fill: #0f0f0f");
+        estadoAccion.setText("¡PDF generado!");
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(e -> estadoAccion.setText(""));
+        pause.play();
     }
 }
