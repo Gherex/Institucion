@@ -26,7 +26,7 @@
     <VBox spacing="10">
         <HBox spacing="10">
             <Label text="Ingrese el código del alumno a buscar: " styleClass="label-buscar" />
-            <TextField fx:id="inputBuscar" styleClass="text-field-buscar" />
+            <TextField fx:id="inputBuscar" styleClass="text-field-buscar" onKeyTyped="#handleNumericInput" />
         </HBox>
         <Button onAction="#btnBuscar" styleClass="button">Buscar</Button>
     </VBox>
